@@ -19,7 +19,7 @@ export class MbAmbulanceWlList {
           estimatedDurationMinutes: 15,
           condition: 'Kontrola'
       }, {
-          name: 'Bc. August Cézar',
+          name: 'Bc. August Niekto',
           patientId: '10096',
           since: new Date(Date.now() - 30 * 60).toISOString(),
           estimatedStart: new Date(Date.now() + 30 * 60).toISOString(),
