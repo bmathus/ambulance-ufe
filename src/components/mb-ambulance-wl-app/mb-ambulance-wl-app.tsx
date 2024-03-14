@@ -13,8 +13,9 @@ declare global {
 })
 export class MbAmbulanceWlApp {
   @State() private relativePath = '';
-
   @Prop() basePath: string = '';
+  @Prop() apiBase: string;
+  @Prop() ambulanceId: string;
 
   componentWillLoad() {
     const baseUri = new URL(this.basePath, document.baseURI || '/').pathname;
@@ -46,6 +47,7 @@ export class MbAmbulanceWlApp {
       element = 'editor';
       entryId = this.relativePath.split('/')[1];
     }
+    console.log('hello');
 
     const navigate = (path: string) => {
       const absolute = new URL(path, new URL(this.basePath, document.baseURI)).pathname;
@@ -58,7 +60,11 @@ export class MbAmbulanceWlApp {
         {element === 'editor' ? (
           <mb-ambulance-wl-editor entry-id={entryId} oneditor-closed={() => navigate('./list')}></mb-ambulance-wl-editor>
         ) : (
-          <mb-ambulance-wl-list onentry-clicked={(ev: CustomEvent<string>) => navigate('./entry/' + ev.detail)}></mb-ambulance-wl-list>
+          <mb-ambulance-wl-list
+            ambulance-id={this.ambulanceId}
+            api-base={this.apiBase}
+            onentry-clicked={(ev: CustomEvent<string>) => navigate('./entry/' + ev.detail)}
+          ></mb-ambulance-wl-list>
         )}
       </Host>
     );
